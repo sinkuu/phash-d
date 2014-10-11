@@ -1,0 +1,8 @@
+{
+	"name": "phash",
+	"homepage": "http://phash.org/",
+	"license": "GPL-3.0",
+	"copyright": "Copyright © 2008-2010 Evan Klinger & David Starkweather",
+	"libs": ["pHash"],
+	"targetType": "library"
+}

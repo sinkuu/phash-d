@@ -1,0 +1,7 @@
+{
+	"name": "example",
+	"dependencies": {
+		"phash": { "path": "../" }
+	},
+	"versions": ["pHash_ImageHash"]
+}
