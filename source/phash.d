@@ -5,12 +5,10 @@ enum int MaxFileSize = (1<<30); /* 1GB file size limit (for mvp files) */
 enum size_t HeaderSize = 64;     /* header size for mvp file */
 
 
-extern (C++):
+extern (C++) struct CImg(T) { }
 
 
-struct CImg(T) { }
-
-
+extern (C):
 nothrow: @nogc:
 
 
