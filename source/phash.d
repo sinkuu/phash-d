@@ -5,7 +5,7 @@ enum int MaxFileSize = (1<<30); /* 1GB file size limit (for mvp files) */
 enum size_t HeaderSize = 64;     /* header size for mvp file */
 
 
-extern (C++) struct CImg(T) { }
+extern (C++) struct CImg(T);
 
 
 extern (C):
@@ -22,7 +22,7 @@ struct DP
     ubyte hash_type;
 }
 
-struct BinHash 
+struct BinHash
 {
 	ubyte* hash;
 	uint bytelength;
@@ -30,23 +30,23 @@ struct BinHash
 	ubyte bitmask;  // used by addbit()
 
 	/*
-	 * add a single bit to hash. the bits are 
+	 * add a single bit to hash. the bits are
 	 * written from left to right.
 	 */
 	int addbit(ubyte bit) pure nothrow @nogc
 	{
-		if (bitmask == 0) 
+		if (bitmask == 0)
 		{
 			bitmask = 128; // reset bitmask to "10000000"
 			byteidx++;     // jump to next byte in array
 		}
 
 		if (byteidx >= bytelength) return -1;
-		
+
 		if (bit == 1) *(hash + byteidx) |= bitmask;
 		bitmask >>=1;
 		return 0;
-	}	
+	}
 }
 
 BinHash* _ph_bmb_new(uint bytelength);
@@ -90,7 +90,7 @@ enum int delta = 1;
 
 auto ROTATELEFT(X, BITS)(X x, BITS bits)
 {
-	return (x << bits) | (x >> 64-bits);
+	return (x << bits) | (x >> 64 - bits);
 }
 
 struct TxtHashPoint
@@ -130,7 +130,7 @@ const(char*) ph_about() @safe pure;
  *  to 180 degrees from horizontal.
  *  /param img - CImg src image
  *  /param  N  - int number of angled lines to consider.
- *  /param  projs - (out) Projections struct 
+ *  /param  projs - (out) Projections struct
  *  /return int value - less than 0 for error
  */
 version (pHash_ImageHash)
@@ -145,7 +145,7 @@ version (pHash_ImageHash)
 	*/
 	int ph_feature_vector(ref const Projections projs,ref Features fv);
 
-	/*! /brief dct 
+	/*! /brief dct
 	 *  Compute the dct of a given vector
 	 *  /param R - vector of input series
 	 *  /param D - (out) the dct of R
@@ -168,10 +168,10 @@ version (pHash_ImageHash)
 	/*! /brief image digest
 	 *  Compute the image digest for an image given the input image
 	 *  /param img - CImg object representing an input image
-	 *  /param sigma - double value for the deviation for a gaussian filter function 
+	 *  /param sigma - double value for the deviation for a gaussian filter function
 	 *  /param gamma - double value for gamma correction on the input image
 	 *  /param digest - (out) Digest struct
-	 *  /param N      - int value for the number of angles to consider. 
+	 *  /param N      - int value for the number of angles to consider.
 	 *  /return       - less than 0 for error
 	 */
 	int _ph_image_digest(ref const CImg!ubyte img,double sigma, double gamma,ref Digest digest,int N=180);
@@ -188,7 +188,7 @@ version (pHash_ImageHash)
 
 
 	/*! /brief compare 2 images
-	 *  /param imA - CImg object of first image 
+	 *  /param imA - CImg object of first image
 	 *  /param imB - CImg object of second image
 	 *  /param pcc   - (out) double value for peak of cross correlation
 	 *  /param sigma - double value for the deviation of gaussian filter
@@ -280,7 +280,7 @@ int ph_bitcount8(ubyte val) @safe pure;
 
 /** /brief compute hamming distance between two byte arrays
  *  /param hashA - byte array for first hash
- *  /param lenA - int length of hashA 
+ *  /param lenA - int length of hashA
  *  /param hashB - byte array for second hash
  *  /param lenB - int length of hashB
  *  /return double value for normalized hamming distance
